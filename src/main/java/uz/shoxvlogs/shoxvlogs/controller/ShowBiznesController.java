@@ -1,5 +1,7 @@
 package uz.shoxvlogs.shoxvlogs.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.ShowBiznes;
 import uz.shoxvlogs.shoxvlogs.service.ShowBiznesSerivce;
@@ -16,11 +18,10 @@ public class ShowBiznesController {
     public ShowBiznesController(ShowBiznesSerivce showBiznesSerivce) {
         this.showBiznesSerivce = showBiznesSerivce;
     }
-
-
+    
     @GetMapping
-    public List<ShowBiznes> getAll() {
-        return showBiznesSerivce.getAll();
+    public Page<ShowBiznes> getAll(Pageable pageable) {
+        return showBiznesSerivce.getAll(pageable);
     }
 
     @PostMapping

@@ -1,5 +1,7 @@
 package uz.shoxvlogs.shoxvlogs.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.Yangilik;
 import uz.shoxvlogs.shoxvlogs.service.YangilikService;
@@ -19,8 +21,8 @@ public class YangilikController {
 
 
     @GetMapping
-    public List<Yangilik> getAll() {
-        return yangilikService.getAll();
+    public Page<Yangilik> getAll(Pageable pageable) {
+        return yangilikService.getAll(pageable);
     }
 
     @PostMapping

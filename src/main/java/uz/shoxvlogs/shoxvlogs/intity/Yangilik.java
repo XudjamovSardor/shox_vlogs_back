@@ -1,6 +1,7 @@
 package uz.shoxvlogs.shoxvlogs.intity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class Yangilik {
@@ -8,7 +9,7 @@ public class Yangilik {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String matni;
+    private String matn;
 
     @ManyToOne
     private Fayl image;
@@ -16,13 +17,16 @@ public class Yangilik {
     @Column(columnDefinition="TEXT")
     private String tuliqMalumot;
 
+    private LocalDate date;
+
     public Yangilik() {}
 
-    public Yangilik(Long id, String matni, Fayl image, String tuliqMalumot) {
+    public Yangilik(Long id, String matn, Fayl image, String tuliqMalumot, LocalDate date) {
         this.id = id;
-        this.matni = matni;
+        this.matn = matn;
         this.image = image;
         this.tuliqMalumot = tuliqMalumot;
+        this.date = date;
     }
 
     public Long getId() {
@@ -33,12 +37,12 @@ public class Yangilik {
         this.id = id;
     }
 
-    public String getMatni() {
-        return matni;
+    public String getMatn() {
+        return matn;
     }
 
-    public void setMatni(String matni) {
-        this.matni = matni;
+    public void setMatn(String matn) {
+        this.matn = matn;
     }
 
     public Fayl getImage() {
@@ -55,5 +59,13 @@ public class Yangilik {
 
     public void setTuliqMalumot(String tuliqMalumot) {
         this.tuliqMalumot = tuliqMalumot;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

@@ -1,5 +1,7 @@
 package uz.shoxvlogs.shoxvlogs.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.OnlineYangilik;
 import uz.shoxvlogs.shoxvlogs.service.OnlineYangilikService;
@@ -8,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/onlinenew")
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin(maxAge = 3600, value = "*")
 public class OnlineYangilikController {
 
     private final OnlineYangilikService onlineYangilikService;
@@ -23,6 +25,11 @@ public class OnlineYangilikController {
         return onlineYangilikService.getAll();
     }
 
+
+    @GetMapping("/{sahifa}")
+    public Page<OnlineYangilik> getByBoshSahifa(@PathVariable Boolean sahifa, Pageable pageable, @RequestParam("type") String tur) {
+        return onlineYangilikService.getByBoshSahifa(sahifa, tur, pageable);
+    }
     @PostMapping
     public OnlineYangilik create(@RequestBody OnlineYangilik onlineYangilik) {
         return onlineYangilikService.create(onlineYangilik);

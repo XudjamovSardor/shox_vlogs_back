@@ -1,5 +1,7 @@
 package uz.shoxvlogs.shoxvlogs.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.shoxvlogs.shoxvlogs.intity.OnlineYangilik;
 import uz.shoxvlogs.shoxvlogs.repository.OnlineYangilikRepository;
@@ -18,6 +20,10 @@ public class OnlineYangilikService {
 
     public List<OnlineYangilik> getAll() {
         return onlineYangilikRepository.findAll();
+    }
+
+    public Page<OnlineYangilik> getByBoshSahifa(Boolean aBoolean, String tur, Pageable pageable) {
+        return onlineYangilikRepository.findAllByBoshSahifagaAndTur(aBoolean, tur, pageable);
     }
 
     public OnlineYangilik create(OnlineYangilik onlineYangilik) {

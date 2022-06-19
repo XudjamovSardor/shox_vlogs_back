@@ -1,9 +1,12 @@
 package uz.shoxvlogs.shoxvlogs.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.shoxvlogs.shoxvlogs.intity.Yangilik;
 import uz.shoxvlogs.shoxvlogs.repository.YangilikRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -15,12 +18,15 @@ public class YangilikService {
         this.yangilikRepository = yangilikRepository;
     }
 
-    public List<Yangilik> getAll() {
-        return yangilikRepository.findAll();
+    public Page<Yangilik> getAll(Pageable pageable) {
+        return yangilikRepository.findAll(pageable);
     }
 
     public Yangilik create(Yangilik yangilik) {
-        if (yangilik.getId() == null) return yangilikRepository.save(yangilik);
+        if (yangilik.getId() == null) {
+            yangilik.setDate(LocalDate.now());
+            return yangilikRepository.save(yangilik);
+        };
         throw new RuntimeException("Id bulmasligi kerak");
     }
 

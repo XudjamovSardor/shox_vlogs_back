@@ -1,6 +1,8 @@
 package uz.shoxvlogs.shoxvlogs.intity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class ShowBiznes {
@@ -16,13 +18,16 @@ public class ShowBiznes {
     @Column(columnDefinition="TEXT")
     private String tuliqMalumot;
 
+    private LocalDate date;
+
     public ShowBiznes() {}
 
-    public ShowBiznes(Long id, String matn, Fayl image, String tuliqMalumot) {
+    public ShowBiznes(Long id, String matn, Fayl image, String tuliqMalumot, LocalDate date) {
         this.id = id;
         this.matn = matn;
         this.image = image;
         this.tuliqMalumot = tuliqMalumot;
+        this.date = date;
     }
 
     public Long getId() {
@@ -55,5 +60,13 @@ public class ShowBiznes {
 
     public void setTuliqMalumot(String tuliqMalumot) {
         this.tuliqMalumot = tuliqMalumot;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate dateTime) {
+        this.date = dateTime;
     }
 }

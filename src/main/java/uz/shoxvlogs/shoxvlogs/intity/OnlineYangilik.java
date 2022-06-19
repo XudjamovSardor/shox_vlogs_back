@@ -13,17 +13,17 @@ public class OnlineYangilik {
 
     private String link;
 
-    private Boolean BoshSahifaga;
+    private Boolean boshSahifaga;
 
-    private Tur tur;
+    private String tur;
 
     public OnlineYangilik() {}
 
-    public OnlineYangilik(Long id, String caption, String link, Boolean boshSahifaga, Tur tur) {
+    public OnlineYangilik(Long id, String caption, String link, Boolean boshSahifaga, String tur) {
         this.id = id;
         this.caption = caption;
         this.link = link;
-        BoshSahifaga = boshSahifaga;
+        this.boshSahifaga = boshSahifaga;
         this.tur = tur;
     }
 
@@ -52,18 +52,18 @@ public class OnlineYangilik {
     }
 
     public Boolean getBoshSahifaga() {
-        return BoshSahifaga;
+        return boshSahifaga;
     }
 
     public void setBoshSahifaga(Boolean boshSahifaga) {
-        BoshSahifaga = boshSahifaga;
+        this.boshSahifaga = boshSahifaga;
     }
 
-    public Tur getTur() {
+    public String getTur() {
         return tur;
     }
 
-    public void setTur(Tur tur) {
+    public void setTur(String tur) {
         this.tur = tur;
     }
 }
