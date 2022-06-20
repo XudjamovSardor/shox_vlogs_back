@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.ShowBiznes;
+import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 import uz.shoxvlogs.shoxvlogs.service.ShowBiznesSerivce;
 
 import java.util.List;
@@ -14,19 +15,22 @@ import java.util.List;
 public class ShowBiznesController {
 
     private final ShowBiznesSerivce showBiznesSerivce;
+    private final AuthoService authoService;
 
-    public ShowBiznesController(ShowBiznesSerivce showBiznesSerivce) {
+    public ShowBiznesController(ShowBiznesSerivce showBiznesSerivce, AuthoService authoService) {
         this.showBiznesSerivce = showBiznesSerivce;
+        this.authoService = authoService;
     }
-    
+
     @GetMapping
     public Page<ShowBiznes> getAll(Pageable pageable) {
         return showBiznesSerivce.getAll(pageable);
     }
 
     @PostMapping
-    public ShowBiznes create(@RequestBody ShowBiznes showBiznes) {
-        return showBiznesSerivce.create(showBiznes);
+    public ShowBiznes create(@RequestBody ShowBiznes showBiznes, @RequestParam("code") String code) {
+        if (authoService.validation(code))  return showBiznesSerivce.create(showBiznes);
+        return null;
     }
 
     @PutMapping

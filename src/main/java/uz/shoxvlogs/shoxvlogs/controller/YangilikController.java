@@ -2,11 +2,11 @@ package uz.shoxvlogs.shoxvlogs.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.Yangilik;
+import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 import uz.shoxvlogs.shoxvlogs.service.YangilikService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/new")
@@ -14,9 +14,12 @@ import java.util.List;
 public class YangilikController {
 
     private final YangilikService yangilikService;
+    private final AuthoService authoService;
+    ;
 
-    public YangilikController(YangilikService yangilikService) {
+    public YangilikController(YangilikService yangilikService, AuthoService authoService) {
         this.yangilikService = yangilikService;
+        this.authoService = authoService;
     }
 
 
@@ -26,8 +29,10 @@ public class YangilikController {
     }
 
     @PostMapping
-    public Yangilik create(@RequestBody Yangilik yangilik) {
-        return yangilikService.create(yangilik);
+    public Yangilik create(@RequestBody Yangilik yangilik, @RequestParam("code") String code, HttpRequest request) {
+        System.out.println(request);
+        if (authoService.validation(code)) return yangilikService.create(yangilik);
+        return null;
     }
 
     @PutMapping

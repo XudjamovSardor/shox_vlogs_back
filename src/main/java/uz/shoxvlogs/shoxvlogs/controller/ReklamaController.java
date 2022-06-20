@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.Reklama;
+import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 import uz.shoxvlogs.shoxvlogs.service.ReklamaSerivce;
 
 @RestController
@@ -12,11 +13,12 @@ import uz.shoxvlogs.shoxvlogs.service.ReklamaSerivce;
 public class ReklamaController {
 
     private final ReklamaSerivce reklamaSerivce;
+    private final AuthoService authoService;
 
-    public ReklamaController(ReklamaSerivce reklamaSerivce) {
+    public ReklamaController(ReklamaSerivce reklamaSerivce, AuthoService authoService) {
         this.reklamaSerivce = reklamaSerivce;
+        this.authoService = authoService;
     }
-
 
     @GetMapping
     public Page<Reklama> getAll(Pageable pageable) {
