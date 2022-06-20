@@ -12,14 +12,11 @@ public class Reklama {
     @ManyToOne
     private Fayl image;
 
-    private Boolean baner;
-
     public Reklama() {}
 
-    public Reklama(Long id, Fayl image, Boolean baner) {
+    public Reklama(Long id, Fayl image) {
         this.id = id;
         this.image = image;
-        this.baner = baner;
     }
 
     public Long getId() {
@@ -36,13 +33,5 @@ public class Reklama {
 
     public void setImage(Fayl image) {
         this.image = image;
-    }
-
-    public Boolean getBaner() {
-        return baner;
-    }
-
-    public void setBaner(Boolean baner) {
-        this.baner = baner;
     }
 }
