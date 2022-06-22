@@ -4,9 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.Autho;
 import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 
-import java.net.http.HttpRequest;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 @RestController

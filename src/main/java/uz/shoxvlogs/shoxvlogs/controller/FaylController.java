@@ -32,9 +32,6 @@ public class FaylController {
 
         f = faylService.create(f);
 
-        System.out.println("Fayl nomi: " + f.getNom());
-        System.out.println(file.getSize());
-
         try {
             File file1 = new File(ROOT_FOLDER);
             if (!file1.exists()) {
@@ -84,7 +81,7 @@ public class FaylController {
             }
 
         }
-        throw new RuntimeException("Not found");
+        throw new RuntimeException("Error");
     }
 
     private String getKengaytma(String faylNom){

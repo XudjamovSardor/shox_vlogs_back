@@ -7,6 +7,5 @@ import uz.shoxvlogs.shoxvlogs.intity.Autho;
 
 @Repository
 public interface AuthoRepository extends JpaRepository<Autho, Long> {
-
     boolean existsByCode(String example);
 }

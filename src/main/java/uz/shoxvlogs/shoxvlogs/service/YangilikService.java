@@ -8,6 +8,7 @@ import uz.shoxvlogs.shoxvlogs.repository.YangilikRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class YangilikService {
@@ -20,6 +21,9 @@ public class YangilikService {
 
     public Page<Yangilik> getAll(Pageable pageable) {
         return yangilikRepository.findAll(pageable);
+    }
+    public Optional<Yangilik> getId(Long id) {
+        return yangilikRepository.findById(id);
     }
 
     public Yangilik create(Yangilik yangilik) {

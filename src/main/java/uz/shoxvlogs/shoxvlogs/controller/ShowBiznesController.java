@@ -7,7 +7,6 @@ import uz.shoxvlogs.shoxvlogs.intity.ShowBiznes;
 import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 import uz.shoxvlogs.shoxvlogs.service.ShowBiznesSerivce;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api/starnew")
@@ -28,9 +27,8 @@ public class ShowBiznesController {
     }
 
     @PostMapping
-    public ShowBiznes create(@RequestBody ShowBiznes showBiznes, @RequestParam("code") String code) {
-        if (authoService.validation(code))  return showBiznesSerivce.create(showBiznes);
-        return null;
+    public ShowBiznes create(@RequestBody ShowBiznes showBiznes) {
+        return showBiznesSerivce.create(showBiznes);
     }
 
     @PutMapping

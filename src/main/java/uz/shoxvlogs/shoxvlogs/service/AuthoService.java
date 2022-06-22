@@ -29,6 +29,6 @@ public class AuthoService {
     }
 
     public Boolean validation(String code) {
-        return  authoRepository.existsByCode(code);
+        return authoRepository.existsByCode(code);  
     }
 }

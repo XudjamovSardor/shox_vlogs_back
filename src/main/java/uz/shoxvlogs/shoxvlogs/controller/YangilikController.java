@@ -8,18 +8,17 @@ import uz.shoxvlogs.shoxvlogs.intity.Yangilik;
 import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 import uz.shoxvlogs.shoxvlogs.service.YangilikService;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("api/new")
 @CrossOrigin(maxAge = 3600, value = "*")
 public class YangilikController {
 
     private final YangilikService yangilikService;
-    private final AuthoService authoService;
-    ;
 
     public YangilikController(YangilikService yangilikService, AuthoService authoService) {
         this.yangilikService = yangilikService;
-        this.authoService = authoService;
     }
 
 
@@ -28,11 +27,14 @@ public class YangilikController {
         return yangilikService.getAll(pageable);
     }
 
+    @GetMapping("/{id}")
+    public Optional<Yangilik> getID (@PathVariable Long id) {
+        return yangilikService.getId(id);
+    }
+
     @PostMapping
-    public Yangilik create(@RequestBody Yangilik yangilik, @RequestParam("code") String code, HttpRequest request) {
-        System.out.println(request);
-        if (authoService.validation(code)) return yangilikService.create(yangilik);
-        return null;
+    public Yangilik create(@RequestBody Yangilik yangilik) {
+        return yangilikService.create(yangilik);
     }
 
     @PutMapping
