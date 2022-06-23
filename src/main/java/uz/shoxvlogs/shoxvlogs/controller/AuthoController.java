@@ -23,7 +23,7 @@ public class AuthoController {
         return authoService.get();
     }
 
-    @GetMapping("/{code}")
+    @GetMapping("/validate/{code}")
     public Boolean validation(@PathVariable String code) {
         return authoService.validation(code);
     }
@@ -37,14 +37,14 @@ public class AuthoController {
         String numbers = "1234567890";
         String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
         Random random = new Random();
-        char[] password = new char[20];
+        char[] password = new char[100];
 
         password[0] = lowerCaseLetters.charAt(random.nextInt(lowerCaseLetters.length()));
         password[1] = capitalCaseLetters.charAt(random.nextInt(capitalCaseLetters.length()));
         password[2] = specialCharacters.charAt(random.nextInt(specialCharacters.length()));
         password[3] = numbers.charAt(random.nextInt(numbers.length()));
 
-        for(int i = 4; i< 20 ; i++) {
+        for(int i = 4; i< 100 ; i++) {
             password[i] = combinedChars.charAt(random.nextInt(combinedChars.length()));
         }
 
