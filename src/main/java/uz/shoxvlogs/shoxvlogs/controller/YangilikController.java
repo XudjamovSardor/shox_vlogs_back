@@ -2,6 +2,7 @@ package uz.shoxvlogs.shoxvlogs.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.Yangilik;
 import uz.shoxvlogs.shoxvlogs.service.AuthoService;
@@ -15,11 +16,9 @@ import java.util.Optional;
 public class YangilikController {
 
     private final YangilikService yangilikService;
-    private final AuthoService authoService;
 
-    public YangilikController(YangilikService yangilikService, AuthoService authoService, AuthoService authoService1) {
+    public YangilikController(YangilikService yangilikService) {
         this.yangilikService = yangilikService;
-        this.authoService = authoService1;
     }
 
 
@@ -35,7 +34,7 @@ public class YangilikController {
 
     @PostMapping
     public Yangilik create(@RequestBody Yangilik yangilik, @RequestParam(value = "code", required = false) String code) {
-        if (authoService.validation(code)) return yangilikService.create(yangilik);
+        if (AuthoService.validation(code)) return yangilikService.create(yangilik);
         return null;
     }
 

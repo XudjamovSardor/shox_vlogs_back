@@ -18,7 +18,7 @@ public class OnlineYangilikController {
 
     private final OnlineYangilikService onlineYangilikService;
 
-    public OnlineYangilikController(OnlineYangilikService onlineYangilikService, AuthoService authoService) {
+    public OnlineYangilikController(OnlineYangilikService onlineYangilikService) {
         this.onlineYangilikService = onlineYangilikService;
     }
 
@@ -34,8 +34,9 @@ public class OnlineYangilikController {
         return onlineYangilikService.getByBoshSahifa(sahifa, tur, pageable);
     }
     @PostMapping
-    public OnlineYangilik create(@RequestBody OnlineYangilik onlineYangilik) {
-        return onlineYangilikService.create(onlineYangilik);
+    public OnlineYangilik create(@RequestBody OnlineYangilik onlineYangilik, @RequestParam(value = "code", required = false) String code) {
+        if (AuthoService.validation(code)) return onlineYangilikService.create(onlineYangilik);
+        return null;
     }
 
     @PutMapping

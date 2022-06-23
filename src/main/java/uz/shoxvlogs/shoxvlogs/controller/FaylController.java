@@ -5,6 +5,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import uz.shoxvlogs.shoxvlogs.intity.Fayl;
+import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 import uz.shoxvlogs.shoxvlogs.service.FaylService;
 
 import java.io.*;
@@ -17,6 +18,7 @@ public class FaylController {
 
     private final FaylService faylService;
 
+
     private final String ROOT_FOLDER = "image";
 
 
@@ -25,31 +27,36 @@ public class FaylController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<Fayl> upload(@RequestParam("fail") MultipartFile file) {
-        Fayl f = new Fayl();
-        f.setNom(file.getOriginalFilename());
-        f.setLocalDate(LocalDate.now());
+    public ResponseEntity<Fayl> upload(@RequestParam("fail") MultipartFile file, @RequestParam(value = "code", required = false) String code) {
+        if (AuthoService.validation(code)) {
+            Fayl f = new Fayl();
+            f.setNom(file.getOriginalFilename());
+            f.setLocalDate(LocalDate.now());
 
-        f = faylService.create(f);
+            f = faylService.create(f);
 
-        try {
-            File file1 = new File(ROOT_FOLDER);
-            if (!file1.exists()) {
-                file1.mkdirs();
-            };
+            try {
+                File file1 = new File(ROOT_FOLDER);
+                if (!file1.exists()) {
+                    file1.mkdirs();
+                }
+                ;
 
-            file1 = new File(ROOT_FOLDER + File.separator + f.getId() + getKengaytma(file.getOriginalFilename()));
+                file1 = new File(ROOT_FOLDER + File.separator + f.getId() + getKengaytma(file.getOriginalFilename()));
 
-            file1.createNewFile();
+                file1.createNewFile();
 
-            FileOutputStream fos = new FileOutputStream(file1);
-            fos.write(file.getBytes());
-            fos.close();
-        } catch (IOException e) {
-            faylService.delete(f);
-            throw new RuntimeException(e);
+                FileOutputStream fos = new FileOutputStream(file1);
+                fos.write(file.getBytes());
+                fos.close();
+            } catch (IOException e) {
+                faylService.delete(f);
+                throw new RuntimeException(e);
+            }
+            return ResponseEntity.ok(f);
+        } else {
+            return null;
         }
-        return ResponseEntity.ok(f);
 
     }
 

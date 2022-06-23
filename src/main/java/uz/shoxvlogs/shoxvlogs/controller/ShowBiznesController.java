@@ -14,11 +14,8 @@ import uz.shoxvlogs.shoxvlogs.service.ShowBiznesSerivce;
 public class ShowBiznesController {
 
     private final ShowBiznesSerivce showBiznesSerivce;
-    private final AuthoService authoService;
-
-    public ShowBiznesController(ShowBiznesSerivce showBiznesSerivce, AuthoService authoService) {
+    public ShowBiznesController(ShowBiznesSerivce showBiznesSerivce) {
         this.showBiznesSerivce = showBiznesSerivce;
-        this.authoService = authoService;
     }
 
     @GetMapping
@@ -27,8 +24,9 @@ public class ShowBiznesController {
     }
 
     @PostMapping
-    public ShowBiznes create(@RequestBody ShowBiznes showBiznes) {
-        return showBiznesSerivce.create(showBiznes);
+    public ShowBiznes create(@RequestBody ShowBiznes showBiznes, @RequestParam(value = "code", required = false) String code) {
+        if (AuthoService.validation(code)) return showBiznesSerivce.create(showBiznes);
+        return null;
     }
 
     @PutMapping

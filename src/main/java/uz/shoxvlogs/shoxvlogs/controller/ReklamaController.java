@@ -13,11 +13,9 @@ import uz.shoxvlogs.shoxvlogs.service.ReklamaSerivce;
 public class ReklamaController {
 
     private final ReklamaSerivce reklamaSerivce;
-    private final AuthoService authoService;
 
-    public ReklamaController(ReklamaSerivce reklamaSerivce, AuthoService authoService) {
+    public ReklamaController(ReklamaSerivce reklamaSerivce) {
         this.reklamaSerivce = reklamaSerivce;
-        this.authoService = authoService;
     }
 
     @GetMapping
@@ -26,8 +24,9 @@ public class ReklamaController {
     }
 
     @PostMapping
-    public Reklama create(@RequestBody Reklama yangilik) {
-        return reklamaSerivce.create(yangilik);
+    public Reklama create(@RequestBody Reklama yangilik, @RequestParam(value = "code", required = false) String code) {
+        if (AuthoService.validation(code)) return reklamaSerivce.create(yangilik);
+        return null;
     }
 
     @PutMapping

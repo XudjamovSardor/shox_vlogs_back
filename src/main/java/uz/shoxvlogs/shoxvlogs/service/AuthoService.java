@@ -9,10 +9,10 @@ import java.util.List;
 @Service
 public class AuthoService {
 
-    private final AuthoRepository authoRepository;
+    private static AuthoRepository authoRepository;
 
     public AuthoService(AuthoRepository authoRepository) {
-        this.authoRepository = authoRepository;
+        AuthoService.authoRepository = authoRepository;
     }
 
 
@@ -28,7 +28,7 @@ public class AuthoService {
         authoRepository.deleteAll();
     }
 
-    public Boolean validation(String code) {
+    public static Boolean validation(String code) {
         return authoRepository.existsByCode(code);  
     }
 }

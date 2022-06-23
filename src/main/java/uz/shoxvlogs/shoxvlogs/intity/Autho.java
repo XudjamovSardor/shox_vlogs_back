@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Autho {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(length = 100)
