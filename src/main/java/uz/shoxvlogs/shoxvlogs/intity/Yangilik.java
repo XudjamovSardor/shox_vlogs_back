@@ -17,16 +17,19 @@ public class Yangilik {
     @Column(columnDefinition="TEXT")
     private String tuliqMalumot;
 
+    private String onlineYangilik;
+
     private LocalDate date;
 
     public Yangilik() {}
 
-    public Yangilik(Long id, String matn, Fayl image, String tuliqMalumot, LocalDate date) {
+    public Yangilik(Long id, String matn, Fayl image, String tuliqMalumot, LocalDate date, String onlineYangilik) {
         this.id = id;
         this.matn = matn;
         this.image = image;
         this.tuliqMalumot = tuliqMalumot;
         this.date = date;
+        this.onlineYangilik = onlineYangilik;
     }
 
     public Long getId() {
@@ -67,5 +70,13 @@ public class Yangilik {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getOnlineYangilik() {
+        return onlineYangilik;
+    }
+
+    public void setOnlineYangilik(String onlineYangilik) {
+        this.onlineYangilik = onlineYangilik;
     }
 }

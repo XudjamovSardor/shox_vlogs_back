@@ -28,7 +28,7 @@ public class YangilikController {
         return yangilikService.getAll(pageable);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/search/{id}")
     public Optional<Yangilik> getID (@PathVariable Long id) {
         return yangilikService.getId(id);
     }
