@@ -18,13 +18,8 @@ public class AuthoController {
         this.authoService = authoService;
     }
 
-    @GetMapping
-    public List<Autho> getAll() {
-        return authoService.get();
-    }
-
-    @GetMapping("/validate/{code}")
-    public Boolean validation(@PathVariable String code) {
+    @GetMapping("/validate")
+    public Boolean validation(@RequestParam("code") String code) {
         return authoService.validation(code);
     }
 
