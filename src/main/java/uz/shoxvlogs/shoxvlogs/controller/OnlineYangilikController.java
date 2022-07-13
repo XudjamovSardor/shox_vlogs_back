@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.OnlineYangilik;
-import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 import uz.shoxvlogs.shoxvlogs.service.OnlineYangilikService;
 
 
@@ -22,8 +21,6 @@ public class OnlineYangilikController {
         this.onlineYangilikService = onlineYangilikService;
     }
 
-
-
     @GetMapping
     public List<OnlineYangilik> getAll() {
         return onlineYangilikService.getAll();
@@ -34,9 +31,8 @@ public class OnlineYangilikController {
         return onlineYangilikService.getByBoshSahifa(sahifa, tur, pageable);
     }
     @PostMapping
-    public OnlineYangilik create(@RequestBody OnlineYangilik onlineYangilik, @RequestParam(value = "code", required = false) String code) {
-        if (AuthoService.validation(code)) return onlineYangilikService.create(onlineYangilik);
-        return null;
+    public OnlineYangilik create(@RequestBody OnlineYangilik onlineYangilik) {
+        return onlineYangilikService.create(onlineYangilik);
     }
 
     @PutMapping

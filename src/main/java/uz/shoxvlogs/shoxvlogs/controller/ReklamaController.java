@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.Reklama;
-import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 import uz.shoxvlogs.shoxvlogs.service.ReklamaSerivce;
 
 @RestController
@@ -24,9 +23,8 @@ public class ReklamaController {
     }
 
     @PostMapping
-    public Reklama create(@RequestBody Reklama yangilik, @RequestParam(value = "code", required = false) String code) {
-        if (AuthoService.validation(code)) return reklamaSerivce.create(yangilik);
-        return null;
+    public Reklama create(@RequestBody Reklama yangilik) {
+        return reklamaSerivce.create(yangilik);
     }
 
     @PutMapping

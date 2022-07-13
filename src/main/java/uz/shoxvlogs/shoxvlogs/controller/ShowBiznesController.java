@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import uz.shoxvlogs.shoxvlogs.intity.ShowBiznes;
-import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 import uz.shoxvlogs.shoxvlogs.service.ShowBiznesSerivce;
 
 
@@ -24,9 +23,8 @@ public class ShowBiznesController {
     }
 
     @PostMapping
-    public ShowBiznes create(@RequestBody ShowBiznes showBiznes, @RequestParam(value = "code", required = false) String code) {
-        if (AuthoService.validation(code)) return showBiznesSerivce.create(showBiznes);
-        return null;
+    public ShowBiznes create(@RequestBody ShowBiznes showBiznes) {
+        return showBiznesSerivce.create(showBiznes);
     }
 
     @PutMapping

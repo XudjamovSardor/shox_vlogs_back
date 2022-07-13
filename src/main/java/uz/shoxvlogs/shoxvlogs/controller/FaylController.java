@@ -5,7 +5,6 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import uz.shoxvlogs.shoxvlogs.intity.Fayl;
-import uz.shoxvlogs.shoxvlogs.service.AuthoService;
 import uz.shoxvlogs.shoxvlogs.service.FaylService;
 
 import java.io.*;
@@ -27,8 +26,7 @@ public class FaylController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<Fayl> upload(@RequestParam("fail") MultipartFile file, @RequestParam(value = "code", required = false) String code) {
-        if (AuthoService.validation(code)) {
+    public ResponseEntity<Fayl> upload(@RequestParam("fail") MultipartFile file) {
             Fayl f = new Fayl();
             f.setNom(file.getOriginalFilename());
             f.setLocalDate(LocalDate.now());
@@ -54,11 +52,7 @@ public class FaylController {
                 throw new RuntimeException(e);
             }
             return ResponseEntity.ok(f);
-        } else {
-            return null;
         }
-
-    }
 
     @GetMapping("/download/{id}")
     public ResponseEntity<?> download(@PathVariable Long id) {
